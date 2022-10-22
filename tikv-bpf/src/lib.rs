@@ -49,7 +49,7 @@ static ref STATS: tokio::sync::Mutex<tokio::sync::RwLock<HashMap<IpAddr,Stat>>>=
     tokio::sync::Mutex::new(tokio::sync::RwLock::new(HashMap::new()));
 }
 static LAST_STATS: Mutex<RwLock<Option<HashMap<IpAddr, Stat>>>> = Mutex::new(RwLock::new(None));
-mod test{
+mod test {
     #[test]
     fn main_test() -> anyhow::Result<()> {
         // env_logger::builder()
@@ -69,22 +69,22 @@ pub extern "C" fn c_start_monitor() -> i32 {
     match start_monitor() {
         Ok(true) => 1,
         Ok(false) => 0,
-        Err(_) => -1
+        Err(_) => -1,
     }
 }
 
 #[no_mangle]
 pub extern "C" fn c_get_stats() -> *const c_char {
     if let Ok(cstring) = CString::new(get_stats()) {
-        let boxed=Box::new(cstring);
-        let ptr=boxed.as_ptr();
+        let boxed = Box::new(cstring);
+        let ptr = boxed.as_ptr();
         std::mem::forget(boxed);
         return ptr;
     }
     return 0 as *const c_char;
 }
 
-fn start_monitor() -> Result<bool> {
+pub fn start_monitor() -> Result<bool> {
     let bpf = load_bpf()?;
     let mut lock = THREAD_HANDLE.lock().unwrap();
     let thread_handle = lock.get_mut();
@@ -210,11 +210,10 @@ async fn stats_timer(bpf: &Bpf) {
 
 pub fn get_stats() -> String {
     if let Ok(last_stats_lock) = LAST_STATS.lock() {
-        if let Ok(data_option)=(*last_stats_lock).try_read(){
+        if let Ok(data_option) = (*last_stats_lock).try_read() {
             if let Some(ref data) = *data_option {
                 return serde_json::to_string(&data).unwrap_or("{\"error\":\"1\"}".to_string());
             }
-
         }
     }
     "{\"error\":\"2\"}".to_string()
