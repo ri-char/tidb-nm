@@ -1,5 +1,5 @@
 [package]
-name = "tikv-bpf"
+name = "tikv_bpf"
 version = "0.1.0"
 edition = "2021"
 publish = false
@@ -8,10 +8,10 @@ publish = false
 aya = { version = ">=0.11", features=["async_tokio"] }
 # aya-log = "0.1"
 tikv-bpf-common = { path = "../tikv-bpf-common", features=["user"] }
-anyhow = "1.0.42"
+anyhow = "1"
 # env_logger = "0.9"
 log = "0.4"
-tokio = { version = "1.18", features = ["rt", "time", "sync"] }
+tokio = { version = "1", features = ["rt", "time", "sync"] }
 bytes = "*"
 lazy_static = "*"
 serde = "*"
@@ -19,4 +19,5 @@ serde_derive = "*"
 serde_json = "*"
 
 [lib]
-crate-type = ["staticlib"]
+crate-type = ["staticlib", "dylib"]
+name = "tikv_bpf"

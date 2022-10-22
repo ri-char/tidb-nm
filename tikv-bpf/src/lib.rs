@@ -37,7 +37,7 @@ impl Serialize for IpAddr {
     }
 }
 
-#[derive(Serialize)]
+#[derive(serde_derive::Serialize)]
 struct Stat {
     tx: u64,
     rx: u64,
