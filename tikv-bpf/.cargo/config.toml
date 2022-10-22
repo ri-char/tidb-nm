@@ -1,0 +1,6 @@
+[build]
+target-dir = "../target"
+target = "x86_64-unknown-linux-musl"
+
+[unstable]
+build-std = ["core"]
