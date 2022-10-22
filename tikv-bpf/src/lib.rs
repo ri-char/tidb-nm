@@ -11,7 +11,6 @@ use aya::programs::KProbe;
 use aya::{include_bytes_aligned, Bpf, BpfLoader};
 use log::info;
 use serde::{Serialize, Serializer};
-use serde_derive::Serialize;
 use tikv_bpf_common::EventData;
 
 static THREAD_HANDLE: Mutex<RefCell<bool>> = Mutex::new(RefCell::new(false));

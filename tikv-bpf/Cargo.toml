@@ -6,7 +6,7 @@ publish = false
 
 [dependencies]
 aya = { version = ">=0.11", features=["async_tokio"] }
-aya-log = "0.1"
+# aya-log = "0.1"
 tikv-bpf-common = { path = "../tikv-bpf-common", features=["user"] }
 anyhow = "1.0.42"
 # env_logger = "0.9"
