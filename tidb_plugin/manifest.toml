@@ -1,0 +1,7 @@
+name = "tikv_bpf"
+kind = "Audit"
+description = "a plugin"
+version = "1"
+license = "GPLv3" # Suggested: APLv2 or GPLv3. See https://choosealicense.com/ for details
+validate = "Validate"
+onInit = "OnInit"

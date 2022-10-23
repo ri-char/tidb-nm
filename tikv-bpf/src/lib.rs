@@ -9,7 +9,6 @@ use anyhow::Result;
 use aya::maps::perf::AsyncPerfEventArray;
 use aya::programs::KProbe;
 use aya::{include_bytes_aligned, Bpf, BpfLoader};
-use log::info;
 use serde::{Serialize, Serializer};
 use tikv_bpf_common::EventData;
 
@@ -179,14 +178,6 @@ fn handle_event(bpf: &Bpf) -> Result<()> {
                             },
                         );
                     }
-
-                    info!(
-                        "{}:{}, size: {}, {:?}",
-                        std::net::Ipv4Addr::from(u32::from_be(data.addr)),
-                        u16::from_be(data.port as u16),
-                        data.size,
-                        data.direct
-                    );
                 }
             }
         });
